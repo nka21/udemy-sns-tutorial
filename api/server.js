@@ -9,6 +9,7 @@ const PORT = 8000;
 
 // インスタンス化
 const prisma = new PrismaClient();
+app.use(express.json());
 
 // 新規ユーザー登録API
 app.post("/api/auth/register", async (req, res) => {
