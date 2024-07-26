@@ -10,6 +10,7 @@ const PORT = 8000;
 // インスタンス化
 const prisma = new PrismaClient();
 
+// req.bodyにアクセスするため、JSON形式に設定
 app.use(express.json());
 
 // 新規ユーザー登録API
