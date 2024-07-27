@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-const login = () => {
+const Login = () => {
   return (
     <div
       style={{ height: "88vh" }}
@@ -64,4 +64,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

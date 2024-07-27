@@ -1,8 +1,7 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import Head from "next/head";
 import { useState } from "react";
 
-const signup = () => {
+const Signup = () => {
   const [name, setName] = useState<String>("");
   const [email, setEmail] = useState<String>("");
   const [password, SetPassword] = useState<String>("");
@@ -101,4 +100,4 @@ const signup = () => {
   );
 };
 
-export default signup;
+export default Signup;
