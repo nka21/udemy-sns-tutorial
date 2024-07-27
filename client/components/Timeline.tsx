@@ -1,4 +1,4 @@
-import React from "react";
+import Post from "./Post";
 
 const Timeline = () => {
   return (
@@ -18,6 +18,11 @@ const Timeline = () => {
             </button>
           </form>
         </div>
+        <Post />
+        <Post />
+        <Post />
+        <Post />
+        <Post />
       </main>
     </div>
   );
