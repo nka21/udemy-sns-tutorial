@@ -1,15 +1,26 @@
 import Head from "next/head";
 import { useState } from "react";
+import { useRouter } from "next/router";
+
+import axiosInstance from "@/lib/apiClient";
 
 const Signup = () => {
   const [name, setName] = useState<String>("");
   const [email, setEmail] = useState<String>("");
   const [password, SetPassword] = useState<String>("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // 新規登録を行うAPIを叩く
+    try {
+      await axiosInstance.post("/auth/register", { name, email, password });
+      router.push("/login");
+    } catch (error) {
+      alert("入力内容が正しくありません。");
+    }
   };
 
   return (
