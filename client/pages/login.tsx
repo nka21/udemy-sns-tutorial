@@ -2,12 +2,15 @@ import Head from "next/head";
 import { useState } from "react";
 import axiosInstance from "@/lib/apiClient";
 import { useRouter } from "next/router";
+import { useAuth } from "./auth";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const router = useRouter();
+
+  const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,7 +23,8 @@ const Login = () => {
       });
 
       const token = response.data.token;
-      console.log(token);
+
+      login(token);
 
       router.push("/");
     } catch (error) {
