@@ -34,9 +34,10 @@ router.post("/post", async (req, res) => {
     const newPost = await prisma.post.create({
       data: {
         content,
-        authorId: 1,
+        authorId: 27,
       },
     });
+
     res.status(201).json(newPost);
   } catch (error) {
     console.error(error);
