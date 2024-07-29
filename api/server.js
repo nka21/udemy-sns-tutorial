@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const authRoute = require("./routers/auth");
+const postsRoute = require("./routers/posts");
 
 // 環境変数の設定
 dotenv.config();
@@ -21,6 +22,7 @@ app.use(cors());
 
 // ルートの設定
 app.use("/api/auth", authRoute);
+app.use("/api/posts", postsRoute);
 
 // サーバーの起動
 app.listen(PORT, () => console.log(`server is running on Port ${PORT}`));
