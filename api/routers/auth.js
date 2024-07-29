@@ -1,24 +1,33 @@
-const router = require("express").Router();
+const express = require("express");
 const { PrismaClient } = require("@prisma/client");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-// Prismaクライアントのインスタンス化
+const router = express.Router();
 const prisma = new PrismaClient();
 
-// エラーハンドリング関数
+/**
+ * エラーハンドリング関数
+ * @param {Object} res - レスポンスオブジェクト
+ * @param {number} statusCode - ステータスコード
+ * @param {string} message - エラーメッセージ
+ * @returns {Object} - JSON形式のエラーレスポンス
+ */
 function handleError(res, statusCode, message) {
   return res.status(statusCode).json({ error: message });
 }
 
-// 新規ユーザー登録API
+/**
+ * 新規ユーザー登録API
+ * @route POST /register
+ * @param {Object} req - リクエストオブジェクト
+ * @param {Object} res - レスポンスオブジェクト
+ */
 router.post("/register", async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
-    // bcryptで、passwordをハッシュ化
-    // 10とは、saltRoundという、ハッシュ化の強度
-    // saltRoundが高すぎると、処理に時間がかかる
+    // パスワードをハッシュ化
     const hashedPassword = await bcrypt.hash(password, 10);
 
     /*
@@ -35,11 +44,17 @@ router.post("/register", async (req, res) => {
 
     return res.json({ user });
   } catch (error) {
+    console.error(error);
     return handleError(res, 500, "ユーザー登録中にエラーが発生しました。");
   }
 });
 
-// ユーザーログインAPI
+/**
+ * ユーザーログインAPI
+ * @route POST /login
+ * @param {Object} req - リクエストオブジェクト
+ * @param {Object} res - レスポンスオブジェクト
+ */
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -65,6 +80,7 @@ router.post("/login", async (req, res) => {
 
     return res.json({ token });
   } catch (error) {
+    console.error(error);
     return handleError(res, 500, "ログイン中にエラーが発生しました。");
   }
 });
