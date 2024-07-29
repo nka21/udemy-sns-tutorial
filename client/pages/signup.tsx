@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-import axiosInstance from "@/lib/apiClient";
+import axiosInstance from "@/lib/axiosInstance";
 
 const Signup = () => {
   const [username, setUsername] = useState<string>("");
