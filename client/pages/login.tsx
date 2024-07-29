@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useState } from "react";
-import axiosInstance from "@/lib/apiClient";
+import axiosInstance from "@/lib/axiosInstance";
 import { useRouter } from "next/router";
 import { useAuth } from "./auth";
 
