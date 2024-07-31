@@ -36,6 +36,9 @@ router.post("/post", async (req, res) => {
         content,
         authorId: 27,
       },
+      include: {
+        author: true,
+      },
     });
 
     res.status(201).json(newPost);
