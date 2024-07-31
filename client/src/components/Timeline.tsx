@@ -11,10 +11,11 @@ const Timeline = () => {
     e.preventDefault();
 
     try {
-      await axiosInstance.post("/posts/post", {
+      const newPosts = await axiosInstance.post("/posts/post", {
         content: postText,
       });
 
+      setLatestPosts((prevPosts) => [newPosts.data, ...prevPosts]);
       setPostText("");
     } catch (error) {
       console.error(error);
