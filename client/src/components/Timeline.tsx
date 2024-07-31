@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axiosInstance from "@/lib/axiosInstance";
 import Post from "./Post";
 import { PostType } from "../types";
@@ -23,6 +23,21 @@ const Timeline = () => {
       alert("ログインしてください。");
     }
   };
+
+  // コンポーネントをレンダリングした時に実行される処理
+  // 投稿を日付順に取得するAPIを実行
+  useEffect(() => {
+    const fetchLatestPosts = async () => {
+      try {
+        const response = await axiosInstance.get("/posts/get_latest_post");
+        setLatestPosts(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchLatestPosts();
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-100">
