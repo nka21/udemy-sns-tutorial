@@ -1,9 +1,11 @@
 import { useState } from "react";
 import axiosInstance from "@/src/lib/axiosInstance";
 import Post from "./Post";
+import { PostType } from "../types";
 
 const Timeline = () => {
   const [postText, setPostText] = useState<string>("");
+  const [latestPosts, setLatestPosts] = useState<PostType[]>([]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
