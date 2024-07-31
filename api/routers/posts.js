@@ -41,10 +41,29 @@ router.post("/post", async (req, res) => {
       },
     });
 
-    res.status(201).json(newPost);
+    return res.status(201).json(newPost);
   } catch (error) {
     console.error(error);
     return handleError(res, 500, "投稿中にエラーが発生しました。");
+  }
+});
+
+/**
+ * 最新記事取得用API
+ * @route GET /get_latest_post
+ * @param  res - レスポンスオブジェクト
+ */
+router.get("/get_latest_post", async (req, res) => {
+  try {
+    // 投稿日時順に最新10個の投稿を取得
+    const latestPosts = await prisma.post.findMany({
+      take: 10,
+      orderBy: { createdAt: "desc" },
+    });
+    return res.json(latestPosts);
+  } catch (error) {
+    console.error(error);
+    return handleError(res, 500, "投稿取得中にエラーが発生しました。");
   }
 });
 
