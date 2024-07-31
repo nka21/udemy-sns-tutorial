@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import axiosInstance from "@/lib/axiosInstance";
+import React, { useContext, useEffect } from "react";
 
 interface AuthContextType {
   // 引数として、tokenをstring型で受け取り、返り血は空のためvoid
@@ -22,6 +23,13 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
+  const token = localStorage.getItem("auth_token");
+
+  // ユーザーがtokenを所持していれば、headerに追加記述する処理
+  useEffect(() => {
+    axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
+  }, [token]);
+
   // 渡されたtokenを、localStorageに保存する非同期関数
   const login = async (token: string) => {
     localStorage.setItem("auth_token", token);
