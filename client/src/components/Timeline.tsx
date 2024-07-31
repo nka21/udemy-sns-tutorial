@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axiosInstance from "@/src/lib/axiosInstance";
+import axiosInstance from "@/lib/axiosInstance";
 import Post from "./Post";
 import { PostType } from "../types";
 
