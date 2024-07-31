@@ -59,6 +59,9 @@ router.get("/get_latest_post", async (req, res) => {
     const latestPosts = await prisma.post.findMany({
       take: 10,
       orderBy: { createdAt: "desc" },
+      include: {
+        author: true,
+      },
     });
     return res.json(latestPosts);
   } catch (error) {
