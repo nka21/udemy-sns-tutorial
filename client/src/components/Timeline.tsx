@@ -44,11 +44,9 @@ const Timeline = () => {
             </button>
           </form>
         </div>
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
+        {latestPosts.map((post: PostType) => (
+          <Post key={post.id} />
+        ))}
       </main>
     </div>
   );
