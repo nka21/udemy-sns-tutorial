@@ -1,5 +1,6 @@
 const express = require("express");
 const { PrismaClient } = require("@prisma/client");
+const isAuthenticated = require("../middlewares/isAuthenticated");
 
 const router = express.Router();
 const prisma = new PrismaClient();
@@ -21,7 +22,7 @@ function handleError(res, statusCode, message) {
  * @param {Object} req - リクエストオブジェクト
  * @param {Object} res - レスポンスオブジェクト
  */
-router.post("/post", async (req, res) => {
+router.post("/post", isAuthenticated, async (req, res) => {
   const { content } = req.body; // req.bodyから投稿内容を取得
 
   // contentに投稿内容がなかった場合
@@ -34,7 +35,7 @@ router.post("/post", async (req, res) => {
     const newPost = await prisma.post.create({
       data: {
         content,
-        authorId: 27,
+        authorId: req.userId,
       },
       include: {
         author: true,
