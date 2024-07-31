@@ -23,12 +23,11 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const token = localStorage.getItem("auth_token");
-
   // ユーザーがtokenを所持していれば、headerに追加記述する処理
   useEffect(() => {
+    const token = localStorage.getItem("auth_token");
     axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
-  }, [token]);
+  }, []);
 
   // 渡されたtokenを、localStorageに保存する非同期関数
   const login = async (token: string) => {
