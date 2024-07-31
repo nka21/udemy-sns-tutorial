@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axiosInstance from "@/lib/axiosInstance";
+import axiosInstance from "@/src/lib/axiosInstance";
 import Post from "./Post";
 
 const Timeline = () => {
