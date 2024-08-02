@@ -55,6 +55,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   // 渡されたtokenを、localStorageに保存する非同期関数
   const login = async (token: string) => {
     localStorage.setItem("auth_token", token);
+
+    try {
+      axiosInstance.get("/users/find").then((res) => {
+        setUser(res.data.user);
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // localStorageから認証tokenを削除
