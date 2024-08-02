@@ -28,6 +28,15 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const token = localStorage.getItem("auth_token");
     if (token) {
       axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
+
+      axiosInstance
+        .get("/users/find")
+        .then((res) => {
+          setUser(res.data.user);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
   }, []);
 
