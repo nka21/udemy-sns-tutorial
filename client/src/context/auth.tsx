@@ -71,6 +71,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   const authMethods = {
+    user,
     login,
     logout,
   };
