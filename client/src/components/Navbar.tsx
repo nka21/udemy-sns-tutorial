@@ -1,6 +1,10 @@
+import { useAuth } from "@/context/auth";
 import Link from "next/link";
 
 const Navbar = () => {
+  const { user } = useAuth();
+  console.log(user);
+
   return (
     <header className="bg-gray-700 p-4 text-white">
       <div className="container mx-auto flex justify-between items-center">
