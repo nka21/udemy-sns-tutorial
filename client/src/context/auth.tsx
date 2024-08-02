@@ -70,6 +70,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   // localStorageから認証tokenを削除
   const logout = () => {
     localStorage.removeItem("auth_token");
+    delete axiosInstance.defaults.headers["Authorization"];
+    setUser(null);
   };
 
   const authMethods = {
