@@ -26,7 +26,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   // ユーザーがtokenを所持していれば、headerに追加記述する処理
   useEffect(() => {
     const token = localStorage.getItem("auth_token");
-    axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
+    if (token) {
+      axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
+    }
   }, []);
 
   // 渡されたtokenを、localStorageに保存する非同期関数
