@@ -55,6 +55,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   // 渡されたtokenを、localStorageに保存する非同期関数
   const login = async (token: string) => {
     localStorage.setItem("auth_token", token);
+    // middlewareでログインしているか判定するための記述
+    axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
 
     try {
       axiosInstance.get("/users/find").then((res) => {
