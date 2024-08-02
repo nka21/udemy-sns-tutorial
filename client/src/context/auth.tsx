@@ -1,7 +1,12 @@
 import axiosInstance from "@/lib/axiosInstance";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 interface AuthContextType {
+  user: null | {
+    id: number;
+    email: string;
+    username: string;
+  };
   // 引数として、tokenをstring型で受け取り、返り血は空のためvoid
   login: (token: string) => void;
   // 引数は、logoutなのでtokenを受け取らず、返り血は空のためvoid
@@ -13,6 +18,7 @@ interface AuthProviderProps {
 }
 
 const AuthContext = React.createContext<AuthContextType>({
+  user: null,
   login: () => {},
   logout: () => {},
 });
@@ -23,6 +29,12 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
+  const [user, setUser] = useState<null | {
+    id: number;
+    email: string;
+    username: string;
+  }>(null);
+
   // ユーザーがtokenを所持していれば、headerに追加記述する処理
   useEffect(() => {
     const token = localStorage.getItem("auth_token");
